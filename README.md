@@ -20,7 +20,7 @@ The debugger consists of 2 parts;
 - NodeJS server (based on socket.io)
 - Titanium Alloy Widget
 
-Once both are setup and configured you can start adding the alloy tag in your vies where you want the 
+Once both are setup and configured you can start adding the alloy tag in your views where you want the 
 live-prototyper to be active;
 `<Widget id="proto" src="nl.martindekeijzer.liveproto" />`
 
