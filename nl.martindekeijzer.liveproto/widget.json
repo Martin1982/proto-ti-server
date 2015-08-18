@@ -1,0 +1,13 @@
+{
+	"id": "nl.martindekeijzer.liveproto",
+	"name": "nl.martindekeijzer.liveproto",
+	"description" : "Live Alloy element prototyping",
+	"author": "Martin de Keijzer",
+	"version": "1.0",
+	"copyright":"Copyright (c) 2015",
+	"license":"Public Domain",
+	"min-alloy-version": "1.0",
+	"min-titanium-version":"2.1",
+	"tags":"alloy, protoype, live",
+	"platforms":"android,ios"
+}

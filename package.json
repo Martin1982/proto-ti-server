@@ -1,0 +1,19 @@
+{
+  "name": "ti-liveprototype",
+  "version": "1.0.0",
+  "description": "Live prototyping of Titanium apps",
+  "main": "debug.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "titanium",
+    "prototype",
+    "live"
+  ],
+  "author": "Martin de Keijzer",
+  "license": "MIT",
+  "dependencies": {
+    "express.io": "^1.1.13"
+  }
+}

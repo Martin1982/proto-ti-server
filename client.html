@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Titanium live prototyper</title>
+  <style>
+    .name {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<h1>Titanium live prototyper</h1>
+
+<table id="proptable">
+  <tr>
+    <td>
+      <h2>Welcome to the live prototyper.</h2>
+      <p>
+        You've managed to get your prototyping server running,
+        as this project is still highly experimental,
+        here are the steps you need to take to connect your app:
+      </p>
+
+      <ol>
+        <li>Install this module in your app: https://github.com/omorandi/tiws</li>
+        <li>
+          Add the Alloy widget located in debug/nl.martindekeijzer.liveproto to your widgets.
+        </li>
+        <li>
+          Add the configuration to your alloy.js file:
+          <code>
+            Alloy.Globals.liveproto = {
+              server: '192.168.130.19',
+              port: 7076
+            };
+          </code>
+          And set the correct values for your server's IP and port number.
+        </li>
+        <li>
+          Implement the widget in any view that you'd like to live prototype on and run your app with
+          this browser window opened.
+        </li>
+      </ol>
+    </td>
+  </tr>
+</table>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var propTable = document.getElementById('proptable'),
+    newRow, newCell;
+  io = io.connect();
+
+  // Emit ready event.
+  io.emit('ready');
+
+  // Listen for the talk event.
+  io.on('element-data', function(data) {
+    propTable.innerHTML = '';
+    for (var key in data) {
+      if (data.hasOwnProperty(key) && key !== 'id') {
+        // Insert a row in the table at row index 0
+        var newRow   = propTable.insertRow(0);
+
+        // Insert a cell in the row at index 0
+        var newPropertyCell  = newRow.insertCell(0);
+        var newValueCell  = newRow.insertCell(1);
+
+        // Append a text node to the cell
+        var newPropertyText  = document.createTextNode(key);
+        var newValueElement  = document.createElement('input');
+        newValueElement.setAttribute('type', 'text');
+        newValueElement.setAttribute('value', data[key]);
+        newValueElement.setAttribute('data-property', key);
+        newValueElement.setAttribute('data-id', data['id']);
+
+        newValueElement.addEventListener('blur', function(e){
+          io.emit('update-element', {
+            id: e.target.getAttribute('data-id'),
+            property: e.target.getAttribute('data-property'),
+            value: e.target.value
+          });
+        });
+
+        newPropertyCell.setAttribute('class', 'name');
+        newPropertyCell.appendChild(newPropertyText);
+        newValueCell.appendChild(newValueElement);
+      }
+    }
+  })
+
+</script>
+</body>
+</html>
