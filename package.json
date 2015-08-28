@@ -1,8 +1,11 @@
 {
-  "name": "ti-liveprototype",
-  "version": "1.0.0",
+  "name": "proto-ti-server",
+  "version": "1.0.1",
   "description": "Live prototyping of Titanium apps",
-  "main": "debug.js",
+  "bin": {
+    "proto-ti-server": "bin/debug.js"
+  },
+  "main": "./bin/debug.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

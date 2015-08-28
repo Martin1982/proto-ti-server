@@ -1,5 +1,4 @@
-Titanium Live Prototyper
-========================
+# Titanium Live Prototyper Widget
 
 This project allows you to change properties of Titanium Alloy projects on the fly from your web browser.
 
@@ -8,9 +7,18 @@ WARNING: Still highly experimental. Pull requests are much appreciated.
 Getting started
 ===============
 
-1. Globally install the server `npm install -g proto-ti-server`
-2. Start the server `proto-ti-server`
-3. Open a browser and point it to the URL of the server for client instructions
+- Setup the debugging server as mentioned on [Proto-ti repo](https://github.com/Martin1982/proto-ti) 
+- Install the [TiWS Module](https://github.com/omorandi/tiws) in your app
+- Add the Alloy widget located in `nl.martindekeijzer.proto-ti-client` to your widgets.
+- Add the configuration to your config.json file:
+```
+            Alloy.Globals.prototi = {
+              server: '192.168.130.19',
+              port: 7076
+            };
+```
+And set the correct values for your server's IP and port number.
+- Implement the widget in any view that you'd like to live prototype on and run your app with this browser window opened.
 
 Architecture
 ================

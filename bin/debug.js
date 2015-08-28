@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var app = require('express.io')();
 var readline = require('readline');
 
@@ -11,7 +13,7 @@ app.http().io();
 
 // Send the client html.
 app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/client.html')
+  res.sendfile(__dirname + '/../client.html')
 });
 
 app.io.route('element', function(req) {
