@@ -2,6 +2,7 @@
 
 var app = require('express.io')();
 var readline = require('readline');
+var path = require('path');
 
 var rl = readline.createInterface({
   input: process.stdin,
@@ -13,7 +14,7 @@ app.http().io();
 
 // Send the client html.
 app.get('/', function(req, res) {
-  res.sendfile(__dirname + '/../client.html')
+  res.sendfile(path.resolve(__dirname + '/../client.html'));
 });
 
 app.io.route('element', function(req) {
