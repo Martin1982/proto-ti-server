@@ -1,6 +1,6 @@
 {
   "name": "proto-ti-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Live prototyping of Titanium apps",
   "bin": {
     "proto-ti-server": "bin/debug.js"
@@ -16,7 +16,15 @@
   ],
   "author": "Martin de Keijzer",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Martin1982/proto-ti-server"
+  },
+  "bugs": {
+    "url": "https://github.com/Martin1982/proto-ti-server/issues"
+  },
   "dependencies": {
     "express.io": "^1.1.13"
-  }
+  },
+  "preferGlobal": true
 }
