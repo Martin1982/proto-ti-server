@@ -14,6 +14,7 @@ app.http().io();
 
 // Send the client html.
 app.get('/', function(req, res) {
+  console.log('Browser connected...');
   res.sendfile(path.resolve(__dirname + '/../client.html'));
 });
 
