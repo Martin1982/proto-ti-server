@@ -26,23 +26,29 @@
 
       <ol>
         <li>Install this module in your app: <a href="https://github.com/omorandi/tiws" target="_blank">https://github.com/omorandi/tiws</a></li>
+        <li>Clone the <a href="https://github.com/Martin1982/proto-ti-client-alloy" target="_blank">https://github.com/Martin1982/proto-ti-client-alloy</a> repo</li>
         <li>
-          Add the Alloy widget located in `nl.martindekeijzer.liveproto` to your widgets.
+          Add the files <code>proto-ti-client-module.js</code> and <code>socket.io.js</code> to your project's library directory.
         </li>
         <li>
           Add the configuration to your config.json file:<br>
           <pre><code>
-            Alloy.Globals.liveproto = {
-              server: '192.168.130.19',
-              port: 7076
-            };
+            "env:development": {
+              "prototi": {
+                "server": "10.10.10.100",
+                "port": 7076
+              }
+            },
           </code></pre>
           <br>
           And set the correct values for your server's IP and port number.
         </li>
         <li>
-          Implement the widget in any view that you'd like to live prototype on and run your app with
-          this browser window opened.
+          Load and initialize the module in your controller:
+          <pre><code>
+            var prototi = require('proto-ti-client-module');
+            prototi($);
+          </code></pre>
         </li>
       </ol>
     </td>
@@ -61,6 +67,14 @@
 
   // Listen for the talk event.
   io.on('element-data', function(data) {
+    setData(data);
+  });
+
+  String.prototype.ucfirst = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  };
+
+  function setData(data) {
     propTable.innerHTML = '';
     for (var key in data) {
       if (data.hasOwnProperty(key) && key !== 'id') {
@@ -71,12 +85,17 @@
         var newPropertyCell  = newRow.insertCell(0);
         var newValueCell  = newRow.insertCell(1);
 
+        if (data[key] === Object(data[key])) {
+          setData(data[key]);
+          continue;
+        }
+
         // Append a text node to the cell
         var newPropertyText  = document.createTextNode(key);
         var newValueElement  = document.createElement('input');
         newValueElement.setAttribute('type', 'text');
         newValueElement.setAttribute('value', data[key]);
-        newValueElement.setAttribute('data-property', key);
+        newValueElement.setAttribute('data-property', key.ucfirst());
         newValueElement.setAttribute('data-id', data['id']);
 
         newValueElement.addEventListener('blur', function(e){
@@ -92,7 +111,7 @@
         newValueCell.appendChild(newValueElement);
       }
     }
-  })
+  }
 
 </script>
 </body>
